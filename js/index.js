@@ -417,8 +417,8 @@ const updateAppliedFilters = () => {
 	checkedFilters.specializationId = value[1];
 	appliedFilters.category = value[2];
 	checkedFilters.categoryId = value[3];
-	// зберігаємо значення вибору checked в localStorage
-	localStorage.setItem('checkedFilters', JSON.stringify(checkedFilters));
+	// зберігаємо значення вибору checked в sessionStorage
+	sessionStorage.setItem('checkedFilters', JSON.stringify(checkedFilters));
 };
 
 //--------------------------------------------------------------------------//
@@ -435,8 +435,8 @@ const filteringData = () => {
 		return (elementValue1 === value1 || value1 === 'всі') &&
 			(elementValue2 === value2 || value2 === 'всі');
 	});
-	// зберігаємо значення вибору фільтрів в localStorage
-	localStorage.setItem('appliedFilters', JSON.stringify(appliedFilters));
+	// зберігаємо значення вибору фільтрів в sessionStorage
+	sessionStorage.setItem('appliedFilters', JSON.stringify(appliedFilters));
 };
 
 //--------------------------------------------------------------------------//
@@ -452,8 +452,8 @@ sorting.addEventListener('click', (event) => {
 			if (button === target) {
 				appliedSorting.valueId = id;
 				appliedSorting.value = button.textContent.trim().toLowerCase();
-				// зберігаємо вибір активної кнопки в localStorage
-				localStorage.setItem('appliedSorting', JSON.stringify(appliedSorting));
+				// зберігаємо вибір активної кнопки в sessionStorage
+				sessionStorage.setItem('appliedSorting', JSON.stringify(appliedSorting));
 				// надаємо активний клас активній кнопці
 				button.classList.add('sorting__btn--active');
 				sortingData();
@@ -525,10 +525,10 @@ containerCards.addEventListener('click', (event) => {
 });
 
 //--------------------------------------------------------------------------//
-// Завантаження збережених в локальному сховищі налаштувань фільтрування та сортування
+// Завантаження збережених в сховищі sessionStorage налаштувань фільтрування та сортування
 
-// Перевірка, чи в локальному сховищі вже є збережені фільтри
-const storedFilters = localStorage.getItem('appliedFilters');
+// Перевірка, чи в сховищі sessionStorage вже є збережені фільтри
+const storedFilters = sessionStorage.getItem('appliedFilters');
 const storedSavedFilters = JSON.parse(storedFilters);
 
 // Витягуємо збережені фільтри (якщо вони є) та оновлюємо об'єкт appliedFilters
@@ -537,8 +537,8 @@ if (storedFilters) {
 	appliedFilters.specialization = storedSavedFilters.specialization;
 };
 
-// Перевірка, чи в локальному сховищі вже є збережені checked фільтрів
-const storedCheckFilters = localStorage.getItem('checkedFilters');
+// Перевірка, чи в сховищі sessionStorage вже є збережені checked фільтрів
+const storedCheckFilters = sessionStorage.getItem('checkedFilters');
 const storedSavedCheckFilters = JSON.parse(storedCheckFilters);
 
 // Витягуємо збережені checked фільтрів (якщо вони є) та оновлюємо об'єкт checkedFilters
@@ -551,8 +551,8 @@ if (storedCheckFilters) {
 	});
 };
 
-// Перевірка, чи в локальному сховищі вже є збережене значення сортування
-const storedSorting = localStorage.getItem('appliedSorting');
+// Перевірка, чи в сховищі sessionStorage вже є збережене значення сортування
+const storedSorting = sessionStorage.getItem('appliedSorting');
 const storedSavedSorting = JSON.parse(storedSorting);
 
 // Витягуємо збережене значення сортування (якщо воно є) та оновлюємо об'єкт appliedSorting
